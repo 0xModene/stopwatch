@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style media="screen">
+      body {
+        background: black;
+        color: lightgray;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: Monospace;
+        overflow: hidden;
+      }
+      h1 {
+        font-size: 3vw;
+      }
+      #timer {
+        font-size: 10vw;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>Time Since Start</h1>
+    <div id="timer"></div>
+    <script type="text/javascript">
+      const start = new Date(Date.now()).getTime();
+      window.setInterval(() => {
+        let now = new Date(Date.now()).getTime();
+        document.getElementById("timer").innerHTML = msToTime(now - start);
+      }, 100);
+
+      function msToTime(s) {
+        let ms = s % 1000;
+        s = (s - ms) / 1000;
+        let secs = s % 60;
+        s = (s - secs) / 60;
+        let mins = s % 60;
+        let hrs = (s - mins) / 60;
+
+        return pad(hrs) + ':' + pad(mins) + ':' + pad(secs);
+      }
+
+      function pad(n, z) {
+        z = z || 2;
+        return ('00' + n).slice(-z);
+      }
+    </script>
+  </body>
+</html>
